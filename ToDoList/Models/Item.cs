@@ -33,7 +33,7 @@ namespace ToDoList.Models
 
     public static void Delete(int searchId)
     {
-      _instances.RemoveAt(searchId - 1);
+      _instances.RemoveAt(0);
     }
   }
 }

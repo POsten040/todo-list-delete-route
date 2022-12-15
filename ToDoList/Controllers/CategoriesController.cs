@@ -12,20 +12,17 @@ namespace ToDoList.Controllers
       List<Category> allCatagories = Category.GetAll();
       return View(allCatagories);
     }
-
     [HttpGet("/categories/new")]
     public ActionResult New()
     {
       return View();
     }
-
     [HttpPost("/categories")]
     public ActionResult Create(string categoryName)
     {
       Category newCategory = new Category(categoryName);
       return RedirectToAction("Index");
     }
-
     [HttpGet("/categories/{id}")]
     public ActionResult Show(int id)
     {
@@ -36,7 +33,6 @@ namespace ToDoList.Controllers
       model.Add("items", categoryItems);
       return View(model);
     }
-
     [HttpPost("/categories/{categoryId}/items")]
     public ActionResult Create(int categoryId, string itemDescription)
     {
@@ -49,14 +45,17 @@ namespace ToDoList.Controllers
       model.Add("category", foundCategory);
       return View("Show", model);
     }
-
     [HttpPost("/categories/{categoryId}/items/{itemId}")]
     public ActionResult Delete(int categoryId, int itemId)
     {
       Item.Delete(itemId);
       Category.DeleteItem(categoryId, itemId);
-      
-      return RedirectToAction("Index");
+      //Answer came from here
+      //https://stackoverflow.com/questions/1257482/redirecttoaction-with-parameter
+      return RedirectToAction("Show", new {id = categoryId});
+      //can also redirect to other controllers if you wanted
+      //For example 
+      //return RedirectToAction("Index", "Home");
     }
   }
 }

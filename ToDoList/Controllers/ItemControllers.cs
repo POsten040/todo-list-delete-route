@@ -6,15 +6,13 @@ namespace ToDoList.Controllers
 {
   public class ItemsController : Controller
   {
-
-    [HttpGet("/categories/{categoryId}/items/new")]
+    [HttpGet("/items/{categoryId}/items/new")]
     public ActionResult New(int categoryId)
     {
       Category category = Category.Find(categoryId);
       return View(category);
     }
-
-    [HttpGet("/categories/{categoryId}/items/{itemId}")]
+    [HttpGet("/items/{categoryId}/items/{itemId}")]
     public ActionResult Show(int categoryId, int itemId)
     {
       Item item = Item.Find(itemId);
